@@ -1,9 +1,25 @@
-import { useState } from "react";
-import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import CreatePassword from "./views/auth/CreatePassword";
+import ForgotPassword from "./views/auth/ForgotPassword";
+import Login from "./views/auth/Login";
+import Logout from "./views/auth/Logout";
+import Register from "./views/auth/Register";
+import Category from "./views/core/Category";
+import Detail from "./views/core/Detail";
+import Index from "./views/core/Index";
+import Search from "./views/core/Search";
+import AddPost from "./views/dashboard/AddPost";
+import Comments from "./views/dashboard/Comments";
+import Dashboard from "./views/dashboard/Dashboard";
+import EditPost from "./views/dashboard/EditPost";
+import Notifications from "./views/dashboard/Notifications";
+import Posts from "./views/dashboard/Posts";
+import Profile from "./views/dashboard/Profile";
+import About from "./views/pages/About";
+import Contact from "./views/pages/Contact";
 
+import MainWrapper from "../src/layouts/MainWrapper";
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
       <BrowserRouter>
