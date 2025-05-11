@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../partials/Header";
 import Footer from "../partials/Footer";
 import { Link, useNavigate } from "react-router-dom";
@@ -216,7 +216,9 @@ function AddPost() {
                         >
                           <option value="">-------------</option>
                           {categoryList?.map((c, index) => (
-                            <option value={c?.id}>{c?.title}</option>
+                            <option key={index} value={c?.id}>
+                              {c?.title}
+                            </option>
                           ))}
                         </select>
                         <small>
