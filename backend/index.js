@@ -48,3 +48,53 @@ async function run() {
       .collection("purchases");
     const submissionCollection = client
       .db("taskProvider")
+      .collection("submission");
+
+    // jwt relate api
+    app.post("/jwt", async (req, res) => {
+      const user = req.body;
+      const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
+        expiresIn: "3h",
+      });
+      res.send({ token });
+    });
+
+    // Verify Token Middleware
+    const verifyToken = async (req, res, next) => {
+      if (!req.headers.authorization) {
+        return res.status(401).send({ message: "unauthorized access" });
+      }
+      const token = req.headers.authorization;
+      jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+        if (err) {
+          return res.status(401).send({ message: "unauthorized access" });
+        }
+        req.decoded = decoded;
+        console.log("verify token ok");
+        next();
+      });
+    };
+
+    // verify admin
+    const verifyAdmin = async (req, res, next) => {
+      const user = req.decoded.email;
+      const query = { email: user };
+      const result = await userCollection.findOne(query);
+      if (!result || result?.role !== "admin") {
+        return res
+          .status(403)
+          .send({ message: "unauthorized access.........." });
+      }
+      console.log("admin ok");
+      next();
+    };
+
+    // verify taskCreator
+    const verifyTaskCreator = async (req, res, next) => {
+      const user = req.decoded.email;
+      const query = { email: user };
+      const result = await userCollection.findOne(query);
+      if (!result || result?.role !== "task-creator") {
+        return res
+          .status(403)
+          .send({ message: "unauthorized access.........." });
