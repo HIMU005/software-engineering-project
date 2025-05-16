@@ -298,3 +298,53 @@ async function run() {
         res.send(result);
       }
     );
+
+    // get all submissions
+    app.get("/submissions", async (req, res) => {
+      const result = await submissionCollection.find().toArray();
+      res.send(result);
+    });
+
+    // update status
+    app.patch("/submission/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const { status } = req.body;
+      const updateDoc = {
+        $set: { status },
+      };
+      const result = await submissionCollection.updateOne(query, updateDoc);
+      res.send(result);
+    });
+
+    // save withdraw data
+    app.post("/withDraw", verifyToken, async (req, res) => {
+      const withDrawData = req.body;
+      const result = await withDrawCollection.insertOne(withDrawData);
+      res.send(result);
+    });
+
+    // get all withdraw request data
+    app.get("/withDraw", verifyToken, verifyAdmin, async (req, res) => {
+      const result = await withDrawCollection.find().toArray();
+      res.send(result);
+    });
+
+    app.delete("/withDraw/:id", verifyToken, verifyAdmin, async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await withDrawCollection.deleteOne(query);
+      res.send(result);
+    });
+
+    // Admin Statistics
+    app.get("/admin-stat", verifyToken, verifyAdmin, async (req, res) => {
+      const totalUsers = await userCollection.countDocuments();
+      const totalSubmission = await submissionCollection.countDocuments();
+      const totalPurchase = await purchaseCollection.countDocuments();
+      const totalTask = await taskCollection.countDocuments();
+      res.send({
+        totalUsers,
+        totalSubmission,
+        totalPurchase,
+        totalTask,
