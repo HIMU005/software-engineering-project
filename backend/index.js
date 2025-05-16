@@ -248,56 +248,56 @@ async function run() {
         res.send(result);
       }
     );
+
+    // single task by Id
+    app.get("/task/:id", verifyToken, async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await taskCollection.findOne(query);
+      console.log(result);
+      res.send(result);
+    });
+
+    // delete a task by admin
+    app.delete("/task/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await taskCollection.deleteOne(query);
+      res.send(result);
+    });
+
+    // update task details
+    app.patch("/task/:id", verifyToken, async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
       const updateData = req.body;
-      const filter = { email };
       const updateDoc = {
-        $set: { coin: updateData.newCoin },
+        $set: {
+          taskName: updateData.taskName,
+          subInfo: updateData.subInfo,
+          taskDetails: updateData.taskDetails,
+        },
       };
-      const result = await userCollection.updateOne(filter, updateDoc);
+      // console.log(updateDoc);
+      const result = await taskCollection.updateOne(filter, updateDoc);
       res.send(result);
     });
 
-    // update role of an user
-    app.patch(
-      "/user/role/:email",
-      verifyToken,
-      verifyAdmin,
-      async (req, res) => {
-        const email = req.params.email;
-        const { newRole } = req.body;
-        const updateDoc = {
-          $set: { role: newRole },
-        };
-        const result = await userCollection.updateOne({ email }, updateDoc);
-        res.send(result);
-      }
-    );
-
-    // add task details in the db
-    app.post("/tasks", async (req, res) => {
-      const taskData = req.body;
-      const result = await taskCollection.insertOne(taskData);
+    // submission details save in database
+    app.post("/submissions", verifyToken, async (req, res) => {
+      const submitData = req.body;
+      const result = await submissionCollection.insertOne(submitData);
       res.send(result);
     });
 
-    // get all tasks
-    app.get("/tasks", async (req, res) => {
-      const result = await taskCollection.find().toArray();
+    // get all submission by a user
+    app.get("/submissions/:email", verifyToken, async (req, res) => {
+      const email = req.params.email;
+      const result = await submissionCollection
+        .find({ workerEmail: email })
+        .toArray();
       res.send(result);
     });
-
-    // all posted task by a user task creator
-    app.get(
-      "/tasks/:email",
-      verifyToken,
-      verifyTaskCreator,
-      async (req, res) => {
-        const email = req.params.email;
-        const query = { "taskProvider.email": email };
-        const result = await taskCollection.find(query).toArray();
-        res.send(result);
-      }
-    );
 
     // get all submissions
     app.get("/submissions", async (req, res) => {
