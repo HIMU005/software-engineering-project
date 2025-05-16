@@ -248,3 +248,53 @@ async function run() {
         res.send(result);
       }
     );
+      const updateData = req.body;
+      const filter = { email };
+      const updateDoc = {
+        $set: { coin: updateData.newCoin },
+      };
+      const result = await userCollection.updateOne(filter, updateDoc);
+      res.send(result);
+    });
+
+    // update role of an user
+    app.patch(
+      "/user/role/:email",
+      verifyToken,
+      verifyAdmin,
+      async (req, res) => {
+        const email = req.params.email;
+        const { newRole } = req.body;
+        const updateDoc = {
+          $set: { role: newRole },
+        };
+        const result = await userCollection.updateOne({ email }, updateDoc);
+        res.send(result);
+      }
+    );
+
+    // add task details in the db
+    app.post("/tasks", async (req, res) => {
+      const taskData = req.body;
+      const result = await taskCollection.insertOne(taskData);
+      res.send(result);
+    });
+
+    // get all tasks
+    app.get("/tasks", async (req, res) => {
+      const result = await taskCollection.find().toArray();
+      res.send(result);
+    });
+
+    // all posted task by a user task creator
+    app.get(
+      "/tasks/:email",
+      verifyToken,
+      verifyTaskCreator,
+      async (req, res) => {
+        const email = req.params.email;
+        const query = { "taskProvider.email": email };
+        const result = await taskCollection.find(query).toArray();
+        res.send(result);
+      }
+    );
