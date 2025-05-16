@@ -98,3 +98,53 @@ async function run() {
         return res
           .status(403)
           .send({ message: "unauthorized access.........." });
+      }
+      console.log("creator ok");
+      next();
+    };
+
+    // get all hero data
+    app.get("/hero", async (req, res) => {
+      const result = await heroCollection.find().toArray();
+      res.send(result);
+    });
+
+    // create-payment-intent
+    app.post(
+      "/create-payment-intent",
+      verifyToken,
+      verifyTaskCreator,
+      async (req, res) => {
+        const price = req.body.price.price;
+
+        const priceInCent = parseFloat(price) * 100;
+        // if (!price || priceInCent < 1) return;
+        // generate clientSecret
+        const { client_secret } = await stripe.paymentIntents.create({
+          amount: priceInCent,
+          currency: "usd",
+          // In the latest version of the API, specifying the `automatic_payment_methods` parameter is optional because Stripe enables its functionality by default.
+          automatic_payment_methods: {
+            enabled: true,
+          },
+          // payment_method_types: ["card"],
+        });
+        // send client secret as response
+        res.send({ clientSecret: client_secret });
+      }
+    );
+
+    // get all testimonial data
+    app.get("/testimonial", async (req, res) => {
+      const result = await testimonialCollection.find().toArray();
+      res.send(result);
+    });
+
+    // save purchase coin information in database
+    app.post(
+      "/purchase-coin",
+      verifyToken,
+      verifyTaskCreator,
+      async (req, res) => {
+        const purchaseInfo = req.body;
+        const result = await purchaseCollection.insertOne(purchaseInfo);
