@@ -148,3 +148,53 @@ async function run() {
       async (req, res) => {
         const purchaseInfo = req.body;
         const result = await purchaseCollection.insertOne(purchaseInfo);
+        res.send(result);
+      }
+    );
+
+    // get purchase information
+    app.get(
+      "/purchase-coin",
+      verifyToken,
+      verifyTaskCreator,
+      async (req, res) => {
+        const result = await purchaseCollection.find().toArray();
+        res.send(result);
+      }
+    );
+
+    app.get("/purchase-coin/:email", async (req, res) => {
+      const email = req.params.email;
+      const result = await purchaseCollection.find({ email }).toArray();
+      res.send(result);
+    });
+
+    // save the new user document in database
+    app.post("/users", async (req, res) => {
+      const userData = req.body;
+      const result = await userCollection.insertOne(userData);
+      res.send(result);
+    });
+
+    // get all user data
+    app.get("/users", verifyToken, verifyAdmin, async (req, res) => {
+      const result = await userCollection.find().toArray();
+      res.send(result);
+    });
+
+    // get all user data
+    app.get("/usersNormal", async (req, res) => {
+      const result = await userCollection.find().toArray();
+      res.send(result);
+    });
+
+    // get an user role
+    app.get("/user/:email", async (req, res) => {
+      const email = req.params.email;
+      const result = await userCollection.findOne({ email });
+      res.send(result);
+    });
+
+    // update the coin information in for a single user
+    app.patch("/user/:email", verifyToken, async (req, res) => {
+      const email = req.params.email;
