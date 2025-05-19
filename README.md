@@ -147,11 +147,11 @@ For support, please contact our team leads via:
 
 ### 👥 Team Members
 
-| Member             | Professional Links                                                                                                 |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------ |
-| Hashanuz Zaman     | [LinkedIn](https://www.linkedin.com/in/hashanuz-zaman-himu/) • [Portfolio](https://himu005-portfolio.netlify.app/) |
-| Md. Jobaer Hossain | [LinkedIn](https://www.linkedin.com/in/jobaer6767/) • [Portfolio](https://yourportfolio.link)                      |
-| Tanvir Ahmed       | [LinkedIn](https://www.linkedin.com/in/yourprofile/) • [Portfolio](https://yourportfolio.link)                     |
+| Member             | Professional Links                                                                                                       |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| Hashanuz Zaman     | [LinkedIn](https://www.linkedin.com/in/hashanuz-zaman-himu/) • [Portfolio](https://himu005-portfolio.netlify.app/)       |
+| Md. Jobaer Hossain | [LinkedIn](https://www.linkedin.com/in/jobaer6767/) • [Portfolio](https://portfolio-nu-orpin-70.vercel.app/)             |
+| Tanvir Ahmed       | [Facebook](https://www.facebook.com/Iftaker.siddique.tanveer) • [Portfolio](https://istanveer.github.io/Portfolio-IST-/) |
 
 ### Team work
 
