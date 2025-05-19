@@ -71,6 +71,92 @@ STRIPE_SECRET_KEY=sk_test_your_key
 IMAGEBB_KEY=your_imagebb_key" > .env
 
 npm run dev
-
-
 ```
+
+### create a .env file in the server directory:
+
+```bash
+MONGO_URI=mongodb+srv://<user>:<password>@cluster.mongodb.net/micro-task-db
+JWT_SECRET=your_jwt_secret
+STRIPE_SECRET_KEY=sk_test_your_key
+ACCESS_TOKEN_SECRET= your_access_token_key
+```
+
+#### Start the backend server:
+
+```bash
+npm start
+```
+
+## 💻 Frontend Setup
+
+```bash
+git clone https://github.com/your-repo/client.git
+cd client
+npm install
+```
+
+### Create a .env file in the client directory:
+
+```bash
+VITE_apiKey = your_secret_key_to_run_the_project
+VITE_authDomain = your_secret_key_to_run_the_project
+VITE_projectId = your_secret_key_to_run_the_project
+VITE_storageBucket = your_secret_key_to_run_the_project
+VITE_messagingSenderId = your_secret_key_to_run_the_project
+VITE_appId = your_secret_key_to_run_the_project
+VITE_IMGBB_API_KEY = your_secret_key_to_run_the_project
+VITE_STRIPE_PUBLISHABLE_KEY = your_secret_key_to_run_the_project
+```
+
+## 🖥️ Tech Stack
+
+| Component    | Technologies                              |
+| ------------ | ----------------------------------------- |
+| **Frontend** | React, TailwindCSS, Swiper                |
+| **Backend**  | Node.js, Express.js, JWT, Mongoose        |
+| **Database** | MongoDB Atlas                             |
+| **APIs**     | Stripe (Payments), ImageBB (Image Upload) |
+| **DevOps**   | Firebase Hosting, vercel hosting          |
+
+## 🔐 Admin Access
+
+```bash
+Email: abir@gmail.com
+Password: 111111
+```
+
+## 🚀 Deployment
+
+### Frontend (Firebase)
+
+```bash
+npm run build
+firebase deploy
+```
+
+### Backend (Vercel)
+
+```bash
+vercel --prod
+```
+
+## 👥 Team Contact
+
+For support, please contact our team leads via:
+
+### 👥 Team Members
+
+| Member             | Professional Links                                                                                                 |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| Hashanuz Zaman     | [LinkedIn](https://www.linkedin.com/in/hashanuz-zaman-himu/) • [Portfolio](https://himu005-portfolio.netlify.app/) |
+| Md. Jobaer Hossain | [LinkedIn](https://www.linkedin.com/in/jobaer6767/) • [Portfolio](https://yourportfolio.link)                      |
+| Tanvir Ahmed       | [LinkedIn](https://www.linkedin.com/in/yourprofile/) • [Portfolio](https://yourportfolio.link)                     |
+
+### Team work
+
+| Member         | Work                                                                         |
+| -------------- | ---------------------------------------------------------------------------- |
+| hashanuz Zaman | Functional Requirements, component design implement(frontend), schema design |
+| Jobaer Hossain | data flow diagram, pages(front_end), ER-diagram                              |
+| Tanvir         | Normalization, api and firebase setup,                                       |
