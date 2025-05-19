@@ -71,6 +71,156 @@ STRIPE_SECRET_KEY=sk_test_your_key
 IMAGEBB_KEY=your_imagebb_key" > .env
 
 npm run dev
+```
 
+### create a .env file in the server directory:
 
+```bash
+MONGO_URI=mongodb+srv://<user>:<password>@cluster.mongodb.net/micro-task-db
+JWT_SECRET=your_jwt_secret
+STRIPE_SECRET_KEY=sk_test_your_key
+ACCESS_TOKEN_SECRET= your_access_token_key
+```
+
+#### Start the backend server:
+
+```bash
+npm start
+```
+
+## 💻 Frontend Setup
+
+```bash
+git clone https://github.com/your-repo/client.git
+cd client
+npm install
+```
+
+### Create a .env file in the client directory:
+
+```bash
+VITE_apiKey = your_secret_key_to_run_the_project
+VITE_authDomain = your_secret_key_to_run_the_project
+VITE_projectId = your_secret_key_to_run_the_project
+VITE_storageBucket = your_secret_key_to_run_the_project
+VITE_messagingSenderId = your_secret_key_to_run_the_project
+VITE_appId = your_secret_key_to_run_the_project
+VITE_IMGBB_API_KEY = your_secret_key_to_run_the_project
+VITE_STRIPE_PUBLISHABLE_KEY = your_secret_key_to_run_the_project
+```
+
+## 🖥️ Tech Stack
+
+| Component    | Technologies                              |
+| ------------ | ----------------------------------------- |
+| **Frontend** | React, TailwindCSS, Swiper                |
+| **Backend**  | Node.js, Express.js, JWT, Mongoose        |
+| **Database** | MongoDB Atlas                             |
+| **APIs**     | Stripe (Payments), ImageBB (Image Upload) |
+| **DevOps**   | Firebase Hosting, vercel hosting          |
+
+## 🔐 Admin Access
+
+```bash
+Email: abir@gmail.com
+Password: 111111
+```
+
+## 🚀 Deployment
+
+### Frontend (Firebase)
+
+```bash
+npm run build
+firebase deploy
+```
+
+### Backend (Vercel)
+
+```bash
+vercel --prod
+```
+
+## 👥 Team Contact
+
+For support, please contact our team leads via:
+
+### 👥 Team Members
+
+| Member             | Professional Links                                                                                                 |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| Hashanuz Zaman     | [LinkedIn](https://www.linkedin.com/in/hashanuz-zaman-himu/) • [Portfolio](https://himu005-portfolio.netlify.app/) |
+| Md. Jobaer Hossain | [LinkedIn](https://www.linkedin.com/in/jobaer6767/) • [Portfolio](https://yourportfolio.link)                      |
+| Tanvir Ahmed       | [LinkedIn](https://www.linkedin.com/in/yourprofile/) • [Portfolio](https://yourportfolio.link)                     |
+
+### Team work
+
+| Member         | Work                                                                         |
+| -------------- | ---------------------------------------------------------------------------- |
+| hashanuz Zaman | Functional Requirements, component design implement(frontend), schema design |
+| Jobaer Hossain | data flow diagram, pages(front_end), ER-diagram                              |
+| Tanvir         | Normalization, api and firebase setup,                                       |
+
+```mermaid
+flowchart TD
+    %% Client Layer
+    A[Client Devices] -->|HTTPS| B[Load Balancer]
+
+    %% API Layer
+    B --> C[API Gateway]
+
+    %% Service Layer
+    C --> D[Microservices Cluster]
+
+    %% Data Layer
+    D --> E[(Database Cluster)]
+    D --> F[(Cache Layer)]
+    D --> G[External APIs]
+
+    %% Monitoring
+    D --> H[Monitoring]
+    E --> H
+    F --> H
+
+    %% Subgraphs for clarity
+    subgraph Clients
+        A1[Web Browser]
+        A2[Mobile App]
+        A3[Admin Dashboard]
+    end
+
+    subgraph Backend_Services
+        D1[Auth Service\nJWT/OAuth]
+        D2[Task Service\nCRUD Operations]
+        D3[Payment Service\nStripe Integration]
+        D4[Notification Service\nWebSockets]
+    end
+
+    subgraph Data_Storage
+        E1[(MongoDB\nSharded Cluster)]
+        E2[(PostgreSQL\nHA Setup)]
+        E3[(Redis\nCache Cluster)]
+    end
+
+    subgraph Third_Party
+        G1[Stripe Payments]
+        G2[Twilio SMS]
+        G3[AWS S3\nFile Storage]
+    end
+
+    %% Connections
+    A1 & A2 & A3 --> A
+    D1 & D2 & D3 & D4 --> D
+    E1 & E2 & E3 --> E
+    G1 & G2 & G3 --> G
+
+    %% Styling
+    style A fill:#4CAF50,stroke:#388E3C
+    style B fill:#2196F3,stroke:#0D47A1
+    style C fill:#673AB7,stroke:#311B92
+    style D fill:#FF5722,stroke:#BF360C
+    style E fill:#607D8B,stroke:#263238
+    style F fill:#FFC107,stroke:#FF6F00
+    style G fill:#9C27B0,stroke:#4A148C
+    style H fill:#F44336,stroke:#B71C1C
 ```
