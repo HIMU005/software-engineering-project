@@ -161,6 +161,8 @@ For support, please contact our team leads via:
 | Jobaer Hossain | data flow diagram, pages(front_end), ER-diagram                              |
 | Tanvir         | Normalization, api and firebase setup,                                       |
 
+### Data Flow Diagram (DFD)
+
 ```mermaid
 flowchart TD
     %% Client Layer
@@ -173,46 +175,44 @@ flowchart TD
     C --> D[Microservices Cluster]
 
     %% Data Layer
-    D --> E[(Database Cluster)]
-    D --> F[(Cache Layer)]
-    D --> G[External APIs]
+    D --> E[Databases]
+    D --> F[External Services]
 
-    %% Monitoring
-    D --> H[Monitoring]
-    E --> H
-    F --> H
+    %% Replication/Monitoring
+    E --> G[Backup/Replica]
+    F --> H[Monitoring]
 
     %% Subgraphs for clarity
     subgraph Clients
         A1[Web Browser]
-        A2[Mobile App]
-        A3[Admin Dashboard]
+        A2[iOS/Android]
+        A3[Admin Portal]
     end
 
-    subgraph Backend_Services
-        D1[Auth Service\nJWT/OAuth]
-        D2[Task Service\nCRUD Operations]
-        D3[Payment Service\nStripe Integration]
-        D4[Notification Service\nWebSockets]
+    subgraph Backend
+        C --> D1[Auth Service]
+        C --> D2[Task Service]
+        C --> D3[Payment Service]
+        C --> D4[Notification Service]
     end
 
-    subgraph Data_Storage
-        E1[(MongoDB\nSharded Cluster)]
-        E2[(PostgreSQL\nHA Setup)]
-        E3[(Redis\nCache Cluster)]
+    subgraph Data
+        E1[(MongoDB Sharded)]
+        E2[(PostgreSQL HA)]
+        E3[(Redis Cache)]
     end
 
-    subgraph Third_Party
-        G1[Stripe Payments]
-        G2[Twilio SMS]
-        G3[AWS S3\nFile Storage]
+    subgraph Extensions
+        F1[Stripe]
+        F2[Twilio]
+        F3[AWS S3]
     end
 
     %% Connections
     A1 & A2 & A3 --> A
     D1 & D2 & D3 & D4 --> D
     E1 & E2 & E3 --> E
-    G1 & G2 & G3 --> G
+    F1 & F2 & F3 --> F
 
     %% Styling
     style A fill:#4CAF50,stroke:#388E3C
@@ -223,4 +223,5 @@ flowchart TD
     style F fill:#FFC107,stroke:#FF6F00
     style G fill:#9C27B0,stroke:#4A148C
     style H fill:#F44336,stroke:#B71C1C
+
 ```
